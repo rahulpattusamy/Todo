@@ -1,5 +1,5 @@
 
-import {intersection, z} from "zod"
+import {z} from "zod"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
@@ -16,10 +16,10 @@ interface Props{
   onSubmit:(data:TodoData)=>void
 }
 
-const TodoForm = () => {
+const TodoForm = ({onSubmit}:Props) => {
  const {register, handleSubmit} = useForm({resolver:zodResolver(schema)})
   return (
-    <form>
+    <form onSubmit={handleSubmit(data=>onSubmit(data))}>
       <div className="form-group mt-2  col-md-4 ">
         <input
         {...register('work')}

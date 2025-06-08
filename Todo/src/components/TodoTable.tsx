@@ -1,3 +1,5 @@
+import { Days } from "./day";
+
 interface TodoList {
   id: number;
   work: string;
@@ -8,15 +10,23 @@ interface TodoList {
 interface Props {
   todos: TodoList[];
   onDelete: (id: number) => void;
+  onSelectday: (day: string) => void;
 }
 
-const TodoTable = ({ todos, onDelete }: Props) => {
+const TodoTable = ({ todos, onDelete, onSelectday }: Props) => {
   return (
     <table className="table table-bordered mt-3">
       <thead className="">
         <tr>
           <td className="bg-dark text-white">WORK</td>
-          <td className="bg-dark text-white">DAY</td>
+          <td className="bg-dark text-white">
+            <select name="" id="" onChange={(event)=>onSelectday(event.target.value)}>
+              <option value="">FULL WEEK</option>
+              {Days.map((day) => (
+                <option  key={day} value={day}>{day}</option>
+              ))}
+            </select>
+          </td>
           <td className="bg-dark text-white">TIME</td>
           <td className="bg-dark text-white"></td>
         </tr>
@@ -29,7 +39,10 @@ const TodoTable = ({ todos, onDelete }: Props) => {
             <th>{todo.day}</th>
             <th>{todo.time}</th>
             <th>
-              <button className="btn btn-danger" onClick={()=>onDelete(todo.id)}>
+              <button
+                className="btn btn-danger"
+                onClick={() => onDelete(todo.id)}
+              >
                 Delete
               </button>
             </th>
