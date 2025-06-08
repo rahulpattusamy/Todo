@@ -2,6 +2,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.1.0",
     "bootstrap": "^5.3.6",
+    "react-form-hook": "^0.0.1",
     "zod": "^3.25.56"
   }
 }
