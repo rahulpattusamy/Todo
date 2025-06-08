@@ -23,7 +23,7 @@ const TodoTable = ({ todos, onDelete, onSelectday }: Props) => {
             <select name="" id="" onChange={(event)=>onSelectday(event.target.value)}>
               <option value="">FULL WEEK</option>
               {Days.map((day) => (
-                <option  key={day} value={day}>{day}</option>
+                <option  key={day} value={day}>{day.toUpperCase()}</option>
               ))}
             </select>
           </td>
@@ -36,8 +36,8 @@ const TodoTable = ({ todos, onDelete, onSelectday }: Props) => {
         {todos.map((todo) => (
           <tr key={todo.id}>
             <th>{todo.work}</th>
-            <th>{todo.day}</th>
-            <th>{todo.time}</th>
+            <th>{todo.day.toUpperCase()}</th>
+            <th>{todo.time.toUpperCase()}</th>
             <th>
               <button
                 className="btn btn-danger"
