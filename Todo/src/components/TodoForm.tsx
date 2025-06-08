@@ -1,28 +1,32 @@
-
-import {z} from "zod"
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 const schema = z.object({
-  work:z.string().min(3),
-  day:z.string().min(3),
-  time:z.string().min(3)
-})
+  work: z.string().min(3),
+  day: z.string().min(3),
+  time: z.string().min(3),
+});
 
-type TodoData = z.infer<typeof schema>
+type TodoData = z.infer<typeof schema>;
 
-interface Props{
-  onSubmit:(data:TodoData)=>void
+interface Props {
+  onSubmit: (data: TodoData) => void;
 }
 
-const TodoForm = ({onSubmit}:Props) => {
- const {register, handleSubmit} = useForm({resolver:zodResolver(schema)})
+const TodoForm = ({ onSubmit }: Props) => {
+  const { register, handleSubmit, reset } = useForm({
+    resolver: zodResolver(schema),
+  });
   return (
-    <form onSubmit={handleSubmit(data=>onSubmit(data))}>
+    <form
+      onSubmit={handleSubmit((data) => {
+        onSubmit(data), reset();
+      })}
+    >
       <div className="form-group mt-2  col-md-4 ">
         <input
-        {...register('work')}
+          {...register("work")}
           type="text"
           className="form-control"
           placeholder="Enter the work"
@@ -30,7 +34,7 @@ const TodoForm = ({onSubmit}:Props) => {
       </div>
       <div className="form-group mt-3 col-md-4 ">
         <input
-        {...register('day')}
+          {...register("day")}
           type="text"
           className="form-control"
           placeholder="Enter the day"
@@ -38,7 +42,7 @@ const TodoForm = ({onSubmit}:Props) => {
       </div>
       <div className="form-group mt-3  col-md-4 ">
         <input
-        {...register('time')}
+          {...register("time")}
           type="text"
           className="form-control"
           placeholder="Enter the time"
