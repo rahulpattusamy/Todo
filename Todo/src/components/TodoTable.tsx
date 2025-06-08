@@ -5,11 +5,12 @@ interface TodoList {
   time: string;
 }
 
-interface Props{
-todos:TodoList[]
+interface Props {
+  todos: TodoList[];
+  onDelete: (id: number) => void;
 }
 
-const TodoTable = ({todos}:Props) => {
+const TodoTable = ({ todos, onDelete }: Props) => {
   return (
     <table className="table table-bordered mt-3">
       <thead className="">
@@ -22,12 +23,18 @@ const TodoTable = ({todos}:Props) => {
       </thead>
 
       <tbody>
-        {todos.map(todo=><tr key={todo.id}>
+        {todos.map((todo) => (
+          <tr key={todo.id}>
             <th>{todo.work}</th>
             <th>{todo.day}</th>
             <th>{todo.time}</th>
-            <th><button className="btn btn-danger">Delete</button></th>
-        </tr>)}
+            <th>
+              <button className="btn btn-danger" onClick={()=>onDelete(todo.id)}>
+                Delete
+              </button>
+            </th>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
